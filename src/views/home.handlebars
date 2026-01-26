@@ -1,0 +1,119 @@
+<div class="container header-content">
+  <div class="logo">Botellas<span>&</span>Vasos</div>
+  <nav>
+    <ul>
+      <li><a href="">Inicio</a></li>
+      <li><a href="">Productos</a></li>
+      <li><a href="">Admin</a></li>
+      {{! enrutar /realTimeProducts}}
+    </ul>
+  </nav>
+  <button class="cta-button">
+    <i class="fas fa-shopping-cart"></i>
+    Ver Carrito
+  </button>
+</div>
+
+<div>
+  <section class="hero">
+    <div class="container">
+      <h1>Encuentra el envase perfecto</h1>
+      <p>
+        Descubre nuestra colección de botellas y vasos diseñados para mantener
+        tus bebidas frescas y tu estilo impecable.
+      </p>
+      <button class="cta-button">Explorar Colección</button>
+      {{! enrutar /api/products}}
+    </div>
+  </section>
+</div>
+
+<div>
+  <section class="palette-section">
+    <div class="container">
+      <div class="example-card">
+        <h3 class="example-title">Nuestros Productos</h3>
+        <div class="products-grid">
+          {{#each products}}
+            <div class="product-card">
+              <div class="product-img">
+                <img
+                  src="{{this.img}}"
+                  alt="{{this.name}}"
+                  class="product-image"
+                />
+                {{! Fallback si no hay imagen }}
+                {{#unless this.img}}
+                  <i class="fas fa-wine-bottle"></i>
+                {{/unless}}
+              </div>
+              <div class="product-info">
+                <div class="product-category">{{this.category}}</div>
+                <h3 class="product-title">{{this.name}}</h3>
+                <p>{{this.description}}</p>
+                <div class="product-price">${{this.price}}</div>
+                <button
+                  class="cta-button"
+                  style="padding: 10px 20px; font-size: 14px"
+                >
+                  Agregar al carrito
+                </button>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  <div class="container">
+    <div class="footer-content">
+      <div class="footer-column">
+        <h3>Botellas & Vasos</h3>
+        <p>
+          Tu destino para envases sostenibles y elegantes que se adaptan a tu
+          estilo de vida.
+        </p>
+      </div>
+      <div class="footer-column">
+        <h3>Categorías</h3>
+        <ul>
+          <li><a href="#">Botellas Térmicas</a></li>
+          <li><a href="#">Vasos Reutilizables</a></li>
+          <li><a href="#">Botellas Deportivas</a></li>
+          <li><a href="#">Vajilla para Hogar</a></li>
+        </ul>
+      </div>
+      <div class="footer-column">
+        <h3>Enlaces Rápidos</h3>
+        <ul>
+          <li><a href="#">Sobre Nosotros</a></li>
+          <li><a href="#">Envío y Devoluciones</a></li>
+          <li><a href="#">Preguntas Frecuentes</a></li>
+          <li><a href="#">Contacto</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="copyright">
+      &copy; 2026 Botellas & Vasos. Todos los derechos reservados.
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Efecto de hover en las tarjetas de color
+  document.querySelectorAll(".color-card").forEach((card) => {
+  card.addEventListener("mouseenter", function () { const hex =
+  this.querySelector(".color-hex").textContent; this.style.boxShadow = `0 10px
+  20px rgba(0, 0, 0, 0.15), 0 0 0 3px ${hex}40`; });
+  card.addEventListener("mouseleave", function () { this.style.boxShadow =
+  "var(--box-shadow)"; }); }); // Interacción con los botones
+  document.querySelectorAll(".cta-button").forEach((button) => {
+  button.addEventListener("click", function () { this.innerHTML = '<i class="fas
+  fa-check"></i> ¡Acción completada!'; this.style.backgroundColor = "#2C3E50";
+  setTimeout(() => { this.innerHTML = this.getAttribute("data-original") ||
+  this.innerHTML; this.style.backgroundColor = ""; }, 1500); }); // Guardar el
+  texto original button.setAttribute("data-original", button.innerHTML); });
+</script>
