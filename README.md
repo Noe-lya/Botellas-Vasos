@@ -94,27 +94,5 @@ Gestión de imágenes estáticas
 
 Estructura de datos en JSON
 
-📄 Licencia
-Este proyecto está bajo la Licencia MIT - ver el archivo LICENSE para más detalles.
-
-🌟 Características Destacadas
-Para el Usuario
-🎯 Búsqueda inteligente por nombre, categoría y características
-
-❤️ Lista de favoritos para guardar productos
-
-🔔 Notificaciones de productos en oferta
-
-📱 Aplicación PWA para instalación en dispositivos móviles
-
-Para el Administrador
-📊 Dashboard con métricas de ventas
-
-📦 Gestión de inventario en tiempo real
-
-📝 Editor de productos con vista previa
-
-📧 Sistema de notificaciones por email
-
 ✨ ¡Únete a la revolución térmica!
 🌡️ Mantén tu bebida perfecta ⏰ 24 horas al día ♻️ Salva el planeta
