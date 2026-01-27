@@ -44,19 +44,19 @@ VS Code - Editor de código principal
 
 Botellas-y-Vasos/
 │
-├── 📁 public/ # Archivos estáticos del frontend
-│ ├── 📁 images/ # Todas las imágenes
-│ │ ├── quencher.jpg
-│ │ ├── flipStraw.jpg
-│ │ ├── botella-termica.jpg
-│ │ ├── vaso-cafe.jpg
+├── 📁 public/
+│ ├── 📁 images/
+│ │ ├── quencher.png
+│ │ ├── flipStraw.png
+│ │ ├── aeroligth.png
+│ │ ├── taza.png
 │ │ └── ...
-│ ├── 📁 css/ # Estilos CSS
+│ ├── 📁 css/
 │ │ └── styles.css
-│ └── 📁 js/ # JavaScript del cliente
+│ └── 📁 js/
 │ └── index.js
 │
-├── 📁 src/ # TODO el código del backend
+├── 📁 src/
 │ ├── 📁 config/
 │ │ └── db.js
 │ ├── 📁 controllers/
