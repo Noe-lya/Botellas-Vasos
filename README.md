@@ -42,6 +42,7 @@ VS Code - Editor de código principal
 
 📁 Estructura del Proyecto
 
+```bash
 Botellas-y-Vasos/
 │
 ├── 📁 public/
@@ -79,15 +80,16 @@ Botellas-y-Vasos/
 │ │ │ └── main.hbs
 │ │ └── home.hbs
 │ │
-│ ├── package.json  
-│ ├── app.js  
-│ ├── server.js  
-│ ├── productManager.js  
-│ ├── cartManager.js  
-│ ├── .env  
-│ ├── .env.example  
-│ ├── .gitignore  
+│ ├── package.json
+│ ├── app.js
+│ ├── server.js
+│ ├── productManager.js
+│ ├── cartManager.js
+│ ├── .env
+│ ├── .env.example
+│ ├── .gitignore
 │ └── README.md
+```
 
 Diseño responsivo de la tienda
 
