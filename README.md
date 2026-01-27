@@ -42,44 +42,53 @@ VS Code - Editor de código principal
 
 📁 Estructura del Proyecto
 
-Botellas & Vasos/
-├── public/
-│ ├── images/
+Botellas-y-Vasos/
+│
+├── 📁 public/ # Archivos estáticos del frontend
+│ ├── 📁 images/ # Todas las imágenes
 │ │ ├── quencher.jpg
 │ │ ├── flipStraw.jpg
+│ │ ├── botella-termica.jpg
+│ │ ├── vaso-cafe.jpg
 │ │ └── ...
-│ │  
-│ ├── css/
+│ ├── 📁 css/ # Estilos CSS
 │ │ └── styles.css
-│ └── js/
+│ └── 📁 js/ # JavaScript del cliente
 │ └── index.js
-│── config/
-│ └── db.js
-│── controllers/
-│ └── products.controller.js
-├── data/
-│ └── products.json
-└───└── carts.json
-├── middleware/
-│ └── error.middleware.js
-├── models/
-│ └── product.model.js
-├── routes/
-│ ├── products.router.js
-│ └── cart.router.js
-│ └── views.router.js
-├── utils/
-│ ├── httpError.js
-├── views/
-│ ├── layouts/
-│ │ └── main.hbs
-│ └── home.hbs
-├── package.json
-├── dirname.js
-└── README.md
+│
+├── 📁 src/ # TODO el código del backend
+│ ├── 📁 config/
+│ │ └── db.js
+│ ├── 📁 controllers/
+│ │ └── products.controller.js
+│ ├── 📁 data/
+│ │ ├── products.json
+│ │ └── carts.json
+│ ├── 📁 middleware/
+│ │ └── error.middleware.js
+│ ├── 📁 models/
+│ │ └── product.model.js
+│ ├── 📁 routes/
+│ │ ├── products.router.js
+│ │ ├── cart.router.js
+│ │ └── views.router.js
+│ ├── 📁 utils/
+│ │ └── httpError.js
+│ ├── 📁 views/
+│ │ ├── 📁 layouts/
+│ │ │ └── main.hbs
+│ │ └── home.hbs
+│ │
+│ ├── package.json  
+│ ├── app.js  
+│ ├── server.js  
+│ ├── productManager.js  
+│ ├── cartManager.js  
+│ ├── .env  
+│ ├── .env.example  
+│ ├── .gitignore  
+│ └── README.md
 
-🔧 Funcionalidades Implementadas
-✅ Completadas
 Diseño responsivo de la tienda
 
 Catálogo de productos dinámico
