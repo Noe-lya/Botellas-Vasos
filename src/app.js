@@ -4,6 +4,9 @@ import connectMongoDB from "./config/db.js";
 import dotenv from "dotenv";
 import __dirname from "../dirname.js";
 import { errorHandler } from "./middlewares/error.middleware.js";
+import cartRouter from "./routes/carts.router.js";
+import { engine } from "express-handlebars";
+import viewsRouter from "./routes/views.router.js";
 
 //incializamos las variables de entorno
 dotenv.config({ path: __dirname + "/.env" });
@@ -15,8 +18,15 @@ const PORT = process.env.PORT || 8081;
 
 connectMongoDB();
 
+//handlebars config
+app.engine("handlebars", engine());
+app.set("view engine", "handlebars");
+app.set("views", __dirname + "/src/views");
+
 //endpoints
 app.use("/api/products", productsRouter);
+app.use("/api/carts", cartRouter);
+app.use("/", viewsRouter);
 
 app.use(errorHandler);
 

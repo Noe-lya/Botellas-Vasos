@@ -275,10 +275,20 @@ nav ul li a:hover {
   font-weight: 600;
   margin-bottom: 10px;
 }
+.product-stock {
+  color: var(--color-secondary);
+  font-weight: 600;
+  margin-bottom: 10px;
+}
 
 .product-title {
   font-size: 20px;
   margin-bottom: 10px;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
 }
 
 .product-price {

@@ -1,0 +1,53 @@
+<div class="container">
+  <a href="/" class="back-button">← Volver a productos</a>
+  
+  <div class="product-detail">
+    <div class="product-images">
+      <img src="{{product.thumbnail}}" alt="{{product.name}}" class="main-image">
+    </div>
+    
+    <div class="product-info">
+      <h1>{{product.name}}</h1>
+      <div class="product-category">{{product.category}}</div>
+      <div class="product-price">${{product.price}}</div>
+      <div class="product-stock {{#if product.stock}}in-stock{{else}}out-of-stock{{/if}}">
+        {{#if product.stock}}Disponible ({{product.stock}} unidades){{else}}Agotado{{/if}}
+      </div>
+      
+      <div class="product-description">
+        <h3>Descripción</h3>
+        <p>{{product.description}}</p>
+      </div>
+      
+      <div class="product-actions">
+        <button class="cta-button add-to-cart" data-id="{{product._id}}">
+          <i class="fas fa-shopping-cart"></i> Agregar al carrito
+        </button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  document.querySelector('.add-to-cart').addEventListener('click', async function() {
+    const productId = this.dataset.id;
+    
+    try {
+      // Crear o obtener carrito (simplificado - en un caso real necesitarías gestionar el carrito del usuario)
+      const response = await fetch('/api/carts', { method: 'POST' });
+      const { payload: cart } = await response.json();
+      
+      // Agregar producto al carrito
+      await fetch(`/api/carts/${cart._id}/product/${productId}`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ quantity: 1 })
+      });
+      
+      alert('Producto agregado al carrito!');
+    } catch (error) {
+      console.error('Error:', error);
+      alert('Error al agregar al carrito');
+    }
+  });
+</script>

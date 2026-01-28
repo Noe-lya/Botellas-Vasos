@@ -1,0 +1,122 @@
+<div class="container">
+  <h1>Carrito de Compras</h1>
+  
+  {{#if cart.products.length}}
+    <div class="cart-items">
+      {{#each cart.products}}
+        <div class="cart-item">
+          <img src="{{this.product.thumbnail}}" alt="{{this.product.name}}">
+          <div class="item-info">
+            <h3>{{this.product.name}}</h3>
+            <div class="item-category">{{this.product.category}}</div>
+            <div class="item-price">${{this.product.price}} c/u</div>
+            
+            <div class="quantity-controls">
+              <button class="quantity-btn" data-cid="{{../cart._id}}" data-pid="{{this.product._id}}" data-action="decrease">-</button>
+              <span class="quantity">{{this.quantity}}</span>
+              <button class="quantity-btn" data-cid="{{../cart._id}}" data-pid="{{this.product._id}}" data-action="increase">+</button>
+            </div>
+            
+            <div class="item-total">Total: ${{multiply this.product.price this.quantity}}</div>
+          </div>
+          
+          <button class="remove-btn" data-cid="{{../cart._id}}" data-pid="{{this.product._id}}">
+            <i class="fas fa-trash"></i>
+          </button>
+        </div>
+      {{/each}}
+    </div>
+    
+    <div class="cart-summary">
+      <h3>Resumen del Carrito</h3>
+      <div class="total">
+        Total: ${{calculateTotal cart.products}}
+      </div>
+      <button class="cta-button checkout-btn">Finalizar Compra</button>
+      <button class="clear-cart-btn" data-cid="{{cart._id}}">Vaciar Carrito</button>
+    </div>
+  {{else}}
+    <div class="empty-cart">
+      <i class="fas fa-shopping-cart fa-3x"></i>
+      <h2>Tu carrito está vacío</h2>
+      <a href="/" class="cta-button">Ver productos</a>
+    </div>
+  {{/if}}
+</div>
+
+<script>
+  // Funciones helper para Handlebars (deberías registrarlas en tu app)
+  // En tu configuración de Handlebars:
+  // handlebars.registerHelper('multiply', (a, b) => a * b);
+  // handlebars.registerHelper('calculateTotal', (products) => {
+  //   return products.reduce((total, item) => total + (item.product.price * item.quantity), 0);
+  // });
+  
+  // Actualizar cantidad
+  document.querySelectorAll('.quantity-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+      const cid = this.dataset.cid;
+      const pid = this.dataset.pid;
+      const action = this.dataset.action;
+      
+      try {
+        const response = await fetch(`/api/carts/${cid}`);
+        const cart = await response.json();
+        
+        const currentItem = cart.payload.find(item => item.product._id === pid);
+        let newQuantity = currentItem.quantity;
+        
+        if (action === 'increase') {
+          newQuantity++;
+        } else if (action === 'decrease' && newQuantity > 1) {
+          newQuantity--;
+        }
+        
+        await fetch(`/api/carts/${cid}/products/${pid}`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ quantity: newQuantity })
+        });
+        
+        location.reload();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    });
+  });
+  
+  // Eliminar producto
+  document.querySelectorAll('.remove-btn').forEach(btn => {
+    btn.addEventListener('click', async function() {
+      if (confirm('¿Eliminar producto del carrito?')) {
+        const cid = this.dataset.cid;
+        const pid = this.dataset.pid;
+        
+        try {
+          await fetch(`/api/carts/${cid}/products/${pid}`, {
+            method: 'DELETE'
+          });
+          location.reload();
+        } catch (error) {
+          console.error('Error:', error);
+        }
+      }
+    });
+  });
+  
+  // Vaciar carrito
+  document.querySelector('.clear-cart-btn')?.addEventListener('click', async function() {
+    if (confirm('¿Vaciar todo el carrito?')) {
+      const cid = this.dataset.cid;
+      
+      try {
+        await fetch(`/api/carts/${cid}`, {
+          method: 'DELETE'
+        });
+        location.reload();
+      } catch (error) {
+        console.error('Error:', error);
+      }
+    }
+  });
+</script>

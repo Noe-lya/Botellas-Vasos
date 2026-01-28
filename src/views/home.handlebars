@@ -35,20 +35,24 @@
             <div class="product-card">
               <div class="product-img">
                 <img
-                  src="{{this.img}}"
+                  src="{{this.thumbnail}}"
                   alt="{{this.name}}"
                   class="product-image"
                 />
                 {{! Fallback si no hay imagen }}
-                {{#unless this.img}}
+                {{#unless this.thumbnail}}
                   <i class="fas fa-wine-bottle"></i>
                 {{/unless}}
               </div>
               <div class="product-info">
                 <div class="product-category">{{this.category}}</div>
-                <h3 class="product-title">{{this.name}}</h3>
+                <h3 class="product-title"><a
+                    lass="product-title"
+                    href="/products/{{this._id}}"
+                  >{{this.name}}</a></h3>
                 <p>{{this.description}}</p>
                 <div class="product-price">${{this.price}}</div>
+                <div class="product-stock">Stock:{{this.stock}}</div>
                 <button
                   class="cta-button"
                   style="padding: 10px 20px; font-size: 14px"
@@ -62,6 +66,12 @@
       </div>
     </div>
   </section>
+</div>
+
+<div class="pagination">
+  {{#each links}}
+    <a href="{{this.link}}" class="page-link">{{this.text}}</a>
+  {{/each}}
 </div>
 
 <footer>
