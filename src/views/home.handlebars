@@ -2,10 +2,9 @@
   <div class="logo">Botellas<span>&</span>Vasos</div>
   <nav>
     <ul>
-      <li><a href="">Inicio</a></li>
-      <li><a href="">Productos</a></li>
-      <li><a href="">Admin</a></li>
-      {{! enrutar /realTimeProducts}}
+      <li><a href="#">Inicio</a></li>
+      <li><a href="#productos">Productos</a></li>
+      <li><a href="/realTimeProducts">Admin</a></li>
     </ul>
   </nav>
   <button class="cta-button">
@@ -22,8 +21,6 @@
         Descubre nuestra colección de botellas y vasos diseñados para mantener
         tus bebidas frescas y tu estilo impecable.
       </p>
-      <button class="cta-button">Explorar Colección</button>
-      {{! enrutar /api/products}}
     </div>
   </section>
 </div>
@@ -32,7 +29,7 @@
   <section class="palette-section">
     <div class="container">
       <div class="example-card">
-        <h3 class="example-title">Nuestros Productos</h3>
+        <h3 id="productos" class="example-title">Nuestros Productos</h3>
         <div class="products-grid">
           {{#each products}}
             <div class="product-card">

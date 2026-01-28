@@ -1,26 +1,107 @@
 <div>
-  <h1>Real Time Products</h1>
+  <div class="container header-content">
+    <div class="logo">Botellas<span>&</span>Vasos
+      <nav>
+      <ul>
+        <li><a href="./">Inicio</a></li>
+        <li><a href="./#productos">Productos</a></li>
+      <li><a href="#">Admin</a></li>
+      </ul>
+      </nav>
+    </div>
+  </div>
+  <section class="hero">
+    <div class="container">
+      <h1>Real Time Products</h1>
+      <form id="formNewProduct" >
+        <input class= "input" padding: 10px 20px; font-size: 14px
+          type="text"
+          name="name"
+          placeholder="Nombre del producto"
+          required
+        />
+        <input class= "input" style="padding: 10px 20px; font-size: 14px"
+          type="number"
+          name="price"
+          placeholder="Precio del producto"
+          required
+        />
+        <input class= "input" style="padding: 10px 20px; font-size: 14px"
+          type="string"
+          name="description"
+          placeholder="Descripción"
+          required
+        />
+        <input class= "input" style="padding: 10px 20px; font-size: 14px"
+          type="string"
+          name="category"
+          placeholder="Categoría"
+          required
+        />
+        <input class= "input" style="padding: 10px 20px; font-size: 14px"
+          type="thumbnail"
+          name="imgage"
+          placeholder="Imágen"
+          required
+        />
+        <input class= "input" style="padding: 10px 20px; font-size: 14px"
+          type="number"
+          name="stock"
+          placeholder="Stock"
+          required
+        />
+        <button class="cta-button" style="padding: 10px 20px; font-size: 14px" type="submit">Agregar Producto</button>
+      </form>
 
-  <form id="formNewProduct">
-    <input type="text" name="name" placeholder="Nombre del producto" required />
-    <input
-      type="number"
-      name="price"
-      placeholder="Precio del producto"
-      required
-    />
-    <button type="submit">Agregar Producto</button>
-  </form>
-
-  <h2>Lista de Productos</h2>
-  <ul id="productsList">
-    {{#each products}}
-      <li>{{this.name}}
-        - ${{this.price}}
-        <button class="delete-btn" data-id="{{this.id}}">Eliminar</button>
-      </li>
-    {{/each}}
-  </ul>
+      
+<div>
+  <section class="palette-section">
+    <div class="container">
+      <div class="example-card">
+        <h3 id="productos" class="example-title">Lista de Productos</h3>
+        <div class="products-grid">
+          {{#each products}}
+            <div class="product-card">
+              <div class="product-img">
+                <img
+                  src="{{this.img}}"
+                  alt="{{this.name}}"
+                  class="product-image"
+                />
+                {{! Fallback si no hay imagen }}
+                {{#unless this.img}}
+                  <i class="fas fa-wine-bottle"></i>
+                {{/unless}}
+              </div>
+              <div class="product-info">
+                <div class="product-category">{{this.category}}</div>
+                <h3 class="product-title">{{this.name}}</h3>
+                <p>{{this.description}}</p>
+                <div class="product-price">${{this.price}}</div>
+                <div class="product-action"><button
+                  class="cta-button delete-btn"
+                  style="padding: 10px 20px; font-size: 14px"
+                  data-id="{{this.id}}"
+                >
+                  Eliminar
+                </button>
+                <button
+                  class="cta-button edit-btn"
+                  style="padding: 10px 20px left: 20px; font-size: 14px"
+                  data-id="{{this.id}}"
+                >
+                  Editar
+                </button>
+                </div>
+              </div>
+            </div>
+          {{/each}}
+        </div>
+      </div>
+    </div>
+  </section>
+    </div>
+  </section>
 </div>
 <script src="/socket.io/socket.io.js"></script>
 <script src="/js/index.js"></script>

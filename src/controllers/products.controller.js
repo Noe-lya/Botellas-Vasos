@@ -13,9 +13,13 @@ export const getAllProducts = async (req, res, next) => {
 
 export const addProduct = async (req, res, next) => {
   try {
-    const { title, price, stock } = req.body;
+    const { name, price, stock } = req.body;
 
-    const newProduct = await Product.create({ title, price, stock });
+    const newProduct = await Product.create({
+      name,
+      price,
+      stock,
+    });
 
     res.status(201).json({ status: "success", payload: newProduct });
   } catch (error) {
