@@ -33,18 +33,26 @@
     const productId = this.dataset.id;
     
     try {
-      // Crear o obtener carrito (simplificado - en un caso real necesitarías gestionar el carrito del usuario)
-      const response = await fetch('/api/carts', { method: 'POST' });
-      const { payload: cart } = await response.json();
+       // Obtener un carrito existente o crear uno nuevo
+      let cartId = localStorage.getItem('cartId');
+     if (!cartId) {
+        const createCartResponse = await fetch('/api/carts', { 
+          method: 'POST' 
+        });
+        const cartData = await createCartResponse.json();
+        cartId = cartData.payload._id;
+        localStorage.setItem('cartId', cartId);
+      }
       
-      // Agregar producto al carrito
-      await fetch(`/api/carts/${cart._id}/product/${productId}`, {
+      // Ruta para agregar producto
+      await fetch(`/api/carts/${cartId}/product/${productId}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ quantity: 1 })
       });
       
       alert('Producto agregado al carrito!');
+            
     } catch (error) {
       console.error('Error:', error);
       alert('Error al agregar al carrito');

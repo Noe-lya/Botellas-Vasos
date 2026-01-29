@@ -2,14 +2,14 @@
   <div class="logo">Botellas<span>&</span>Vasos</div>
   <nav>
     <ul>
-      <li><a href="#">Inicio</a></li>
-      <li><a href="#productos">Productos</a></li>
-      <li><a href="/realTimeProducts">Admin</a></li>
+      <li><a href="/">Inicio</a></li>
+      <li><a href="/#productos">Productos</a></li>
+      <li><a href="/admin">Admin</a></li>
     </ul>
   </nav>
-  <button class="cta-button">
+  <button class="cta-button" id="view-cart-btn">
+    <a href="/carts/:cid">Ver Carrito</a>
     <i class="fas fa-shopping-cart"></i>
-    Ver Carrito
   </button>
 </div>
 
@@ -47,16 +47,18 @@
               <div class="product-info">
                 <div class="product-category">{{this.category}}</div>
                 <h3 class="product-title"><a
-                    lass="product-title"
-                    href="/products/{{this._id}}"
+                    class="product-title"
+                    href="/products/:pid"
                   >{{this.name}}</a></h3>
                 <p>{{this.description}}</p>
                 <div class="product-price">${{this.price}}</div>
                 <div class="product-stock">Stock:{{this.stock}}</div>
                 <button
-                  class="cta-button"
+                  class="cta-button add-to-cart-btn"
                   style="padding: 10px 20px; font-size: 14px"
-                >
+                  data-product-id="{{this._id}}"
+                  data-product-name="{{this.name}}"
+                ><a href="./cart.handlebars"></a>
                   Agregar al carrito
                 </button>
               </div>
@@ -108,19 +110,3 @@
     </div>
   </div>
 </footer>
-
-<script>
-  // Efecto de hover en las tarjetas de color
-  document.querySelectorAll(".color-card").forEach((card) => {
-  card.addEventListener("mouseenter", function () { const hex =
-  this.querySelector(".color-hex").textContent; this.style.boxShadow = `0 10px
-  20px rgba(0, 0, 0, 0.15), 0 0 0 3px ${hex}40`; });
-  card.addEventListener("mouseleave", function () { this.style.boxShadow =
-  "var(--box-shadow)"; }); }); // Interacción con los botones
-  document.querySelectorAll(".cta-button").forEach((button) => {
-  button.addEventListener("click", function () { this.innerHTML = '<i class="fas
-  fa-check"></i> ¡Acción completada!'; this.style.backgroundColor = "#2C3E50";
-  setTimeout(() => { this.innerHTML = this.getAttribute("data-original") ||
-  this.innerHTML; this.style.backgroundColor = ""; }, 1500); }); // Guardar el
-  texto original button.setAttribute("data-original", button.innerHTML); });
-</script>

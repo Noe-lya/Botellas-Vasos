@@ -59,12 +59,15 @@
       const pid = this.dataset.pid;
       const action = this.dataset.action;
       
-      try {
+ try {
+        // Obtener el carrito
         const response = await fetch(`/api/carts/${cid}`);
-        const cart = await response.json();
+        const result = await response.json();
+        const cart = result.payload;
         
-        const currentItem = cart.payload.find(item => item.product._id === pid);
-        let newQuantity = currentItem.quantity;
+        // Buscar el producto en el carrito
+        const currentItem = cart.products.find(item => item.product._id === pid);
+        let newQuantity = currentItem ? currentItem.quantity : 0;
         
         if (action === 'increase') {
           newQuantity++;
@@ -72,6 +75,7 @@
           newQuantity--;
         }
         
+        // Actualizar cantidad
         await fetch(`/api/carts/${cid}/products/${pid}`, {
           method: 'PUT',
           headers: { 'Content-Type': 'application/json' },
@@ -81,6 +85,7 @@
         location.reload();
       } catch (error) {
         console.error('Error:', error);
+        alert('Error al actualizar la cantidad');
       }
     });
   });
